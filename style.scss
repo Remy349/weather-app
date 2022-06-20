@@ -1,0 +1,75 @@
+/* GOOGLE FONTS */
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700&display=swap');
+
+$bg-color: #f9f9f9;
+$primary-color: #beaee2;
+$secondary-color: #b983ff;
+$white-color: #fff;
+
+/* BASE */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Raleway', sans-serif;
+    background-color: $bg-color;
+}
+
+a { text-decoration: none; }
+
+ul { list-style: none; }
+
+/* REUSABLE CLASSES */
+.main { overflow-x: hidden; }
+
+.container {
+    max-width: 968px;
+    margin-right: 1.5rem;
+    margin-left: 1.5rem;
+}
+
+/* HEADER */
+.header {
+    z-index: 1;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    box-shadow: 0 4px 2px -2px rgba(0,0,0,.1);
+}
+
+/* NAV */
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 4rem;
+
+    &__logo {
+        cursor: default;
+        color: $secondary-color;
+        font-size: 1.5rem;
+        font-weight: 600;
+    }
+
+    &__btn {
+        display: flex;
+        align-items: center;
+        column-gap: .3rem;
+        background-color: $secondary-color;
+        color: $white-color;
+        padding: .5rem;
+        border-radius: 2rem;
+        font-size: 1.1rem;
+        font-weight: 500;
+    }
+
+    &__icon {
+        display: flex;
+        align-items: center;
+        font-size: 1.05rem;
+    }
+}

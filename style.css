@@ -1,8 +1,74 @@
-#app {
-    font-family: Avenir, Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-align: center;
-    color: #2c3e50;
-    margin-top: 60px;
+/* GOOGLE FONTS */
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700&display=swap");
+/* BASE */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
+
+body {
+  font-family: "Raleway", sans-serif;
+  background-color: #f9f9f9;
+}
+
+a {
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+}
+
+/* REUSABLE CLASSES */
+.main {
+  overflow-x: hidden;
+}
+
+.container {
+  max-width: 968px;
+  margin-right: 1.5rem;
+  margin-left: 1.5rem;
+}
+
+/* HEADER */
+.header {
+  z-index: 1;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  box-shadow: 0 4px 2px -2px rgba(0, 0, 0, 0.1);
+}
+
+/* NAV */
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 4rem;
+}
+.nav__logo {
+  cursor: default;
+  color: #b983ff;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+.nav__btn {
+  display: flex;
+  align-items: center;
+  column-gap: 0.3rem;
+  background-color: #b983ff;
+  color: #fff;
+  padding: 0.5rem;
+  border-radius: 2rem;
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+.nav__icon {
+  display: flex;
+  align-items: center;
+  font-size: 1.05rem;
+}
+
+/*# sourceMappingURL=style.css.map */
