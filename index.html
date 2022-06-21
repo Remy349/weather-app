@@ -33,7 +33,7 @@
             <section class="principal">
                 <div class="principal__container">
                     <!-- CONTENT -->
-                    <div class="principal__content">
+                    <div class="principal__content" id="hideContent">
                         <p class="principal__content-subtitle">
                             Welcome to
                         </p>
@@ -43,7 +43,9 @@
                             <br>
                             will be on your day!
                         </p>
-                        <span class="principal__content-hide">Hide</span>
+                        <span class="principal__content-hide" id="hideContentBtn">
+                            Hide
+                        </span>
                     </div>
                     <!-- SEARCH -->
                     <div class="principal__search">
@@ -54,7 +56,8 @@
                                     type="text"
                                     class="principal__search-form_input"
                                     autocomplete="off"
-                                    id="city"
+                                    id="cityName"
+                                    placeholder="City name"
                                 />
                                 <button type="submit" class="principal__search-form_btn">
                                     <i class="fi fi-rr-search principal__search-form_icon"></i>

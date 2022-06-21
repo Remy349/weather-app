@@ -1,3 +1,11 @@
 import './style.css'
 
-console.log('It´s OK!!!')
+/* HIDE CONTENT */
+const hideContentBtn = document.getElementById('hideContentBtn'),
+    hideContent = document.getElementById('hideContent')
+
+if (hideContentBtn) {
+    hideContentBtn.addEventListener('click', () => {
+        hideContent.style.display = 'none'
+    })
+}
