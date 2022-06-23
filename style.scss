@@ -24,6 +24,11 @@ a { text-decoration: none; }
 
 ul { list-style: none; }
 
+img {
+    height: auto;
+    max-width: 100%;
+}
+
 /* REUSABLE CLASSES */
 .container {
     max-width: 968px;
@@ -33,6 +38,7 @@ ul { list-style: none; }
 
 /* HEADER */
 .header {
+    background-color: $bg-color;
     z-index: 1;
     width: 100%;
     position: fixed;
@@ -83,6 +89,7 @@ ul { list-style: none; }
 .main {
     overflow-x: hidden;
     margin-top: 6rem;
+    margin-bottom: 4rem;
 }
 
 /* PRINCIPAL */
@@ -124,6 +131,9 @@ ul { list-style: none; }
     }
 
     &__search {
+        display: grid;
+        row-gap: 3rem;
+
         &-form {
             display: flex;
             justify-content: center;
@@ -167,6 +177,23 @@ ul { list-style: none; }
                 justify-content: center;
                 align-items: center;
             }
+        }
+
+        &-without {
+            &_container {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            &_info {
+                font-size: 1.2rem;
+                color: $primary-color;
+                font-weight: 700;
+                line-height: 1.5;
+            }
+
+            &_text { font-size: 1.3rem; }
         }
     }
 }
