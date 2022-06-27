@@ -1,5 +1,8 @@
 import './style.css'
+// Import images
 import searchImgUrl from './assets/search.png'
+import error404ImgUrl from './assets/error-404.png'
+import error400ImgUrl from './assets/error-400.png'
 
 /* ===> Hide principal content <=== */
 // Get id of the principal content div to hide it
@@ -90,8 +93,10 @@ const currentWeatherApiCall = async (cityNameValue) => {
             console.log(currentWeatherData)
             showApiCallResultsHtml(currentWeatherData)
         } else {
-            const err = await res.json()
-            console.log(err)
+            // Handling errors from the request to the api
+            const { cod, message } = await res.json()
+
+            showErrorsHtml(cod, message)
         }
     } catch (err) {
         console.log(err)
@@ -101,6 +106,60 @@ const currentWeatherApiCall = async (cityNameValue) => {
 // Function to create and add a card showing the results in the html content
 const showApiCallResultsHtml = (dataResults) => {
     searchResults.innerHTML = `
-        <h1>${dataResults.name}, ${dataResults.sys.country}</h1>
+        <div class="principal__search-result">
+            <section class="principal__search-result_card">
+                <article class="principal__search-result_card_container">
+                    <div class="principal__search-result_card_header">
+                        <h3>${dataResults.name}, ${dataResults.sys.country}</h3>
+                    </div>
+                    <div class="principal__search-result_card_content">
+                        <p>Show all results here!</p>
+                    </div>
+                </article>
+            </section>
+        </div>
     `
+}
+
+// Function to show the errors from the api call
+const showErrorsHtml = (codeResponse, messageResult) => {
+    // Handling error 400 from the api response
+    if (codeResponse == 400) {
+        searchResults.innerHTML = `
+            <div class="principal__search-error">
+                <div class="principal__search-error_container">
+                    <p class="principal__search-error_info">
+                        ${messageResult}
+                    </p>
+                    <img
+                        src=${error400ImgUrl}
+                        class="principal__search-error_img"
+                        alt="Image to show error 400"
+                    />
+                    <p class="principal__search-error_text">
+                        Without results
+                    </p>
+                </div>
+            </div>
+        `
+    } else if (codeResponse == 404) {
+        // Handling error 404 not found from the api response
+        searchResults.innerHTML = `
+            <div class="principal__search-error">
+                <div class="principal__search-error_container">
+                    <p class="principal__search-error_info">
+                        ${messageResult}
+                    </p>
+                    <img
+                        src=${error404ImgUrl}
+                        class="principal__search-error_img"
+                        alt="Image to show error 404 not found"
+                    />
+                    <p class="principal__search-error_text">
+                        Without results
+                    </p>
+                </div>
+            </div>
+        `
+    }
 }

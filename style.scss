@@ -90,6 +90,11 @@ img {
     overflow-x: hidden;
     margin-top: 6rem;
     margin-bottom: 4rem;
+
+    &__container {
+        display: grid;
+        row-gap: 3rem;
+    }
 }
 
 /* PRINCIPAL */
@@ -186,14 +191,64 @@ img {
                 align-items: center;
             }
 
+            &_img { width: 90%; }
+
             &_info {
-                font-size: 1.2rem;
+                margin-bottom: 1rem;
+                font-size: 1.4rem;
                 color: $primary-color;
                 font-weight: 700;
                 line-height: 1.5;
+                text-align: center;
             }
 
             &_text { font-size: 1.3rem; }
+        }
+
+        &-error {
+            &_container {
+                @extend .principal__search-without_container;
+            }
+
+            &_img {
+                @extend .principal__search-without_img;
+            }
+
+            &_info {
+                @extend .principal__search-without_info;
+                text-transform: capitalize;
+            }
+
+            &_text {
+                @extend .principal__search-without_text;
+            }
+        }
+
+        &-result {
+            &_card {
+                &_container {
+                    box-shadow: 0 4px 20px rgba(0,0,0,.2);
+                    display: grid;
+                    row-gap: 1.5rem;
+                    border-radius: .5rem;
+                }
+
+                &_header {
+                    background-color: $primary-color;
+                    color: $white-color;
+                    padding: .8rem .5rem;
+                    text-align: center;
+                    border-top-left-radius: .5rem;
+                    border-top-right-radius: .5rem;
+
+                    & h3 { font-size: 1.3rem; }
+                }
+
+                &_content {
+                    text-align: center;
+                    padding: 1.5rem 2rem;
+                }
+            }
         }
     }
 }
