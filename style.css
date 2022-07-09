@@ -190,6 +190,7 @@ img {
   display: grid;
   row-gap: 1.5rem;
   border-radius: 0.5rem;
+  background-color: #fff;
 }
 .principal__search-result_card_header {
   background-color: #a149fa;
@@ -203,8 +204,46 @@ img {
   font-size: 1.3rem;
 }
 .principal__search-result_card_content {
+  padding: 0 1.2rem 1.5rem 1.2rem;
+  display: grid;
+  row-gap: 1rem;
+}
+.principal__search-result_card_content_header {
   text-align: center;
-  padding: 1.5rem 2rem;
+  color: #a149fa;
+  font-weight: 700;
+  font-size: 3rem;
+}
+.principal__search-result_card_content_header p {
+  font-size: 1.2rem;
+  color: #000;
+  margin-top: 1rem;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+.principal__search-result_card_content_data {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  text-align: center;
+  font-size: 1.1rem;
+  column-gap: 0.5rem;
+  row-gap: 0.7rem;
+}
+.principal__search-result_card_content_btns {
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.principal__search-result_card_content_btns_favorite {
+  outline: none;
+  border: none;
+  background-color: #fff;
+  cursor: pointer;
+}
+.principal__search-result_card_content_btns_icon {
+  color: #a149fa;
+  font-size: 2rem;
 }
 
 /*# sourceMappingURL=style.css.map */

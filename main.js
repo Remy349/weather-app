@@ -1,3 +1,6 @@
+// Import modules
+import moment from 'moment'
+// Import styles
 import './style.css'
 // Import images
 import searchImgUrl from './assets/search.png'
@@ -113,7 +116,23 @@ const showApiCallResultsHtml = (dataResults) => {
                         <h3>${dataResults.name}, ${dataResults.sys.country}</h3>
                     </div>
                     <div class="principal__search-result_card_content">
-                        <p>Show all results here!</p>
+                        <div class="principal__search-result_card_content_header">
+                            ${convertTemperature(dataResults.main.temp)}°C
+                            <p>
+                                ${dataResults.weather[0].description} - ${dataResults.weather[0].main}
+                            </p>
+                        </div>
+                        <div class="principal__search-result_card_content_data">
+                            <div>Feels Like: ${convertTemperature(dataResults.main.feelsLike)}°C</div>
+                            <div>Humidity: ${dataResults.main.humidity}%</div>
+                            <div>Sunrise: ${convertTimezone(dataResults.sys.sunrise)}</div>
+                            <div>Sunset: ${convertTimezone(dataResults.sys.sunset)}</div>
+                        </div>
+                        <div class="principal__search-result_card_content_btns">
+                            <button class="principal__search-result_card_content_btns_favorite">
+                                <i class="fi fi-rr-star principal__search-result_card_content_btns_icon"></i>
+                            </button>
+                        </div>
                     </div>
                 </article>
             </section>
@@ -162,4 +181,15 @@ const showErrorsHtml = (codeResponse, messageResult) => {
             </div>
         `
     }
+}
+
+// Function to convert the timezone for each country
+const convertTimezone = (timeValue) => {
+    let seconds = 3600
+    return moment.utc(timeValue, 'X').add(seconds, 'seconds').format('HH:mm a')
+}
+
+// Function to convert temperature
+const convertTemperature = (temp) => {
+    return Math.ceil(temp - 273.15)
 }
