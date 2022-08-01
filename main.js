@@ -1,5 +1,3 @@
-// Import modules
-import moment from 'moment'
 // Import styles
 import './style.css'
 // Import images
@@ -7,7 +5,8 @@ import searchImgUrl from './assets/search.png'
 import error404ImgUrl from './assets/error-404.png'
 import error400ImgUrl from './assets/error-400.png'
 
-/* ===> Hide principal content <=== */
+/* ==> Hide principal content <== */
+
 // Get id of the principal content div to hide it
 const hideContentBtn = document.getElementById('hideContentBtn'),
     hideContent = document.getElementById('hideContent')
@@ -18,7 +17,8 @@ if (hideContentBtn) {
     })
 }
 
-/* ===> Start working on api call and show results <=== */
+/* ==> Start working on api call and show results <== */
+
 // API key
 const APIKEY = import.meta.env.VITE_API_KEY
 // Get form id and city name value for use it in the api call
@@ -93,13 +93,46 @@ const currentWeatherApiCall = async (cityNameValue) => {
                     lat: data.coord.lat
                 }
             }
-            console.log(currentWeatherData)
+            // Call this function to show the results from the api call
             showApiCallResultsHtml(currentWeatherData)
+            // Call this function to make an extra api call
+            apiCallForecast(currentWeatherData)
         } else {
             // Handling errors from the request to the api
             const { cod, message } = await res.json()
 
             showErrorsHtml(cod, message)
+        }
+    } catch (err) {
+        console.log(err)
+    }
+}
+
+// Function to make the 5 days / 3 hours forecast data call
+const apiCallForecast = async (dataResults) => {
+    try {
+        const urlForecast = `https://api.openweathermap.org/data/2.5/forecast?lat=${dataResults.coord.lat}&lon=${dataResults.coord.lon}&cnt=5&appid=${APIKEY}`
+        // Make the request to the api
+        const resForecast = await fetch(urlForecast, { method: "GET" })
+
+        if (resForecast.ok) {
+            const dataForecast = await resForecast.json()
+            // Create an empty array to store the necesary data from the api call result
+            let forecastArray = []
+
+            for (let i in dataForecast.list) {
+                let selectedData = {
+                    dt_txt: dataForecast.list[i].dt_txt
+                }
+
+                forecastArray.push(selectedData)
+            }
+
+            console.log(forecastArray)
+        } else {
+            const errorForecast = await resForecast.json()
+
+            console.log(errorForecast)
         }
     } catch (err) {
         console.log(err)
@@ -125,8 +158,8 @@ const showApiCallResultsHtml = (dataResults) => {
                         <div class="principal__search-result_card_content_data">
                             <div>Feels Like: ${convertTemperature(dataResults.main.feelsLike)}°C</div>
                             <div>Humidity: ${dataResults.main.humidity}%</div>
-                            <div>Sunrise: ${convertTimezone(dataResults.sys.sunrise)}</div>
-                            <div>Sunset: ${convertTimezone(dataResults.sys.sunset)}</div>
+                            <div>Visibility: ${convertVisibility(dataResults.visibility)}km</div>
+                            <div>Wind Speed: ${dataResults.wind.speed}m/s</div>
                         </div>
                         <div class="principal__search-result_card_content_btns">
                             <button class="principal__search-result_card_content_btns_favorite">
@@ -183,13 +216,8 @@ const showErrorsHtml = (codeResponse, messageResult) => {
     }
 }
 
-// Function to convert the timezone for each country
-const convertTimezone = (timeValue) => {
-    let seconds = 3600
-    return moment.utc(timeValue, 'X').add(seconds, 'seconds').format('HH:mm a')
-}
+// Function to convert the visibility
+const convertVisibility = (value) => value / 1000
 
 // Function to convert temperature
-const convertTemperature = (temp) => {
-    return Math.ceil(temp - 273.15)
-}
+const convertTemperature = (temp) => Math.ceil(temp - 273.15)
