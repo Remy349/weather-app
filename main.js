@@ -17,7 +17,7 @@ if (hideContentBtn) {
     })
 }
 
-/* ==> Start working on api call and show results <== */
+/* ==> Start working on the apis call and show results <== */
 
 // API key
 const APIKEY = import.meta.env.VITE_API_KEY
@@ -122,13 +122,24 @@ const apiCallForecast = async (dataResults) => {
 
             for (let i in dataForecast.list) {
                 let selectedData = {
-                    dt_txt: dataForecast.list[i].dt_txt
+                    dt_txt: dataForecast.list[i].dt_txt,
+                    main: {
+                        temp: dataForecast.list[i].main.temp
+                    },
+                    weather: [
+                        {
+                            description: dataForecast.list[i].weather[0].description,
+                            main: dataForecast.list[i].weather[0].main
+                        }
+                    ]
                 }
-
+                // Add new objects to the array that is gonna be use
                 forecastArray.push(selectedData)
             }
 
             console.log(forecastArray)
+            // Call this function to show the results from the forecast api call
+            showForecastApiCallResultsHtml(forecastArray)
         } else {
             const errorForecast = await resForecast.json()
 
@@ -170,7 +181,44 @@ const showApiCallResultsHtml = (dataResults) => {
                 </article>
             </section>
         </div>
+        <div class="principal__search-forecast">
+            <div class="principal__search-forecast_container" id="forecastResults"></div>
+        </div>
     `
+    // Get forecastResult id to show the data result from the forecast api call
+    const forecastResults = document.getElementById('forecastResults')
+    
+    return forecastResults
+}
+
+//Function to create and add many cards showing the results from the forecast api call
+const showForecastApiCallResultsHtml = (dataForecastResults) => {
+    dataForecastResults.forEach((dfResult) => {
+        let sectionForecast = createNode('section'),
+            articleForecast = createNode('article')
+
+        sectionForecast.classList.add('principal__search-forecast_card')
+        articleForecast.classList.add('principal__search-forecast_card_container')
+
+        appendNode(forecastResults, sectionForecast)
+        appendNode(sectionForecast, articleForecast)
+
+        articleForecast.innerHTML = `
+            <div class="principal__search-forecast_card_header">
+                <p>${convertTemperature(dfResult.main.temp)}</p>
+            </div>
+            <div class="principal__search-forecast_card_content">
+                <div class="principal__search-forecast_card_content_top">
+                    <p>${dfResult.dt_txt}</p>
+                </div>
+                <div class="principal__search-forecast_card_content_line"></div>
+                <div class="principal__search-forecast_card_content_bottom">
+                    <div>${dfResult.weather[0].description}</div>
+                    <div>${dfResult.weather[0].main}</div>
+                </div>
+            </div>
+        `
+    })
 }
 
 // Function to show the errors from the api call
@@ -221,3 +269,8 @@ const convertVisibility = (value) => value / 1000
 
 // Function to convert temperature
 const convertTemperature = (temp) => Math.ceil(temp - 273.15)
+
+// Functions to create and add new html tags to the html content
+const createNode = (element) => document.createElement(element)
+
+const appendNode = (parent, child) => parent.appendChild(child)
