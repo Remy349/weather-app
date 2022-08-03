@@ -19,8 +19,11 @@ if (hideContentBtn) {
 
 /* ==> Start working on the apis call and show results <== */
 
+// Global variable to store all the favorite cities
+let FAVORITE_CITIES = []
+
 // API key
-const APIKEY = import.meta.env.VITE_API_KEY
+const API_KEY = import.meta.env.VITE_API_KEY
 // Get form id and city name value for use it in the api call
 const searchForm = document.getElementById('searchForm')
 const cityName = document.getElementById('cityName')
@@ -57,7 +60,7 @@ searchForm.addEventListener('submit', (e) => {
 // Function to make the current weather api call
 const currentWeatherApiCall = async (cityNameValue) => {
     try {
-        const url = `https://api.openweathermap.org/data/2.5/weather?q=${cityNameValue}&appid=${APIKEY}`
+        const url = `https://api.openweathermap.org/data/2.5/weather?q=${cityNameValue}&appid=${API_KEY}`
         // Make the request to the api
         const res = await fetch(url, { method: "GET" })
 
@@ -111,7 +114,7 @@ const currentWeatherApiCall = async (cityNameValue) => {
 // Function to make the 5 days / 3 hours forecast data call
 const apiCallForecast = async (dataResults) => {
     try {
-        const urlForecast = `https://api.openweathermap.org/data/2.5/forecast?lat=${dataResults.coord.lat}&lon=${dataResults.coord.lon}&cnt=5&appid=${APIKEY}`
+        const urlForecast = `https://api.openweathermap.org/data/2.5/forecast?lat=${dataResults.coord.lat}&lon=${dataResults.coord.lon}&cnt=5&appid=${API_KEY}`
         // Make the request to the api
         const resForecast = await fetch(urlForecast, { method: "GET" })
 
@@ -129,15 +132,14 @@ const apiCallForecast = async (dataResults) => {
                     weather: [
                         {
                             description: dataForecast.list[i].weather[0].description,
-                            main: dataForecast.list[i].weather[0].main
+                            main: dataForecast.list[i].weather[0].main,
+                            icon: dataForecast.list[i].weather[0].icon
                         }
                     ]
                 }
                 // Add new objects to the array that is gonna be use
                 forecastArray.push(selectedData)
             }
-
-            console.log(forecastArray)
             // Call this function to show the results from the forecast api call
             showForecastApiCallResultsHtml(forecastArray)
         } else {
@@ -173,7 +175,7 @@ const showApiCallResultsHtml = (dataResults) => {
                             <div>Wind Speed: ${dataResults.wind.speed}m/s</div>
                         </div>
                         <div class="principal__search-result_card_content_btns">
-                            <button class="principal__search-result_card_content_btns_favorite">
+                            <button class="principal__search-result_card_content_btns_favorite" id="addFavorite">
                                 <i class="fi fi-rr-star principal__search-result_card_content_btns_icon"></i>
                             </button>
                         </div>
@@ -185,10 +187,11 @@ const showApiCallResultsHtml = (dataResults) => {
             <div class="principal__search-forecast_container" id="forecastResults"></div>
         </div>
     `
-    // Get forecastResult id to show the data result from the forecast api call
-    const forecastResults = document.getElementById('forecastResults')
-    
-    return forecastResults
+
+    return {
+        forecastResults: document.getElementById('forecastResults'),
+        addFavorite: document.getElementById('addFavorite')
+    }
 }
 
 //Function to create and add many cards showing the results from the forecast api call
@@ -205,7 +208,7 @@ const showForecastApiCallResultsHtml = (dataForecastResults) => {
 
         articleForecast.innerHTML = `
             <div class="principal__search-forecast_card_header">
-                <p>${convertTemperature(dfResult.main.temp)}</p>
+                <p>${convertTemperature(dfResult.main.temp)}°C</p>
             </div>
             <div class="principal__search-forecast_card_content">
                 <div class="principal__search-forecast_card_content_top">
@@ -213,11 +216,40 @@ const showForecastApiCallResultsHtml = (dataForecastResults) => {
                 </div>
                 <div class="principal__search-forecast_card_content_line"></div>
                 <div class="principal__search-forecast_card_content_bottom">
-                    <div>${dfResult.weather[0].description}</div>
-                    <div>${dfResult.weather[0].main}</div>
+                    <div class="principal__search-forecast_card_content_bottom_data">
+                        <div>${dfResult.weather[0].description}</div>
+                        <div>${dfResult.weather[0].main}</div>
+                    </div>
+                    <div class="principal__search-forecast_card_content_bottom_icon">
+                        <img
+                            src="https://openweathermap.org/img/wn/${dfResult.weather[0].icon}.png"
+                            alt="Current weather icon"
+                        />
+                    </div>
                 </div>
             </div>
         `
+    })
+    // Call function to add favorite cities
+    addFavoriteCities()
+}
+
+// Working on the function to add cities to the favorite weather section
+const addFavoriteCities = () => {
+    let isAdded = false
+
+    addFavorite.addEventListener('click', () => {
+        if (isAdded === false) {
+            addFavorite.innerHTML = `
+                <i class="fi fi-sr-star principal__search-result_card_content_btns_added"></i>
+            `
+            isAdded = true
+        } else {
+            addFavorite.innerHTML = `
+                <i class="fi fi-rr-star principal__search-result_card_content_btns_icon"></i>
+            `
+            isAdded = false
+        }
     })
 }
 
