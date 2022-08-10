@@ -340,4 +340,104 @@ img {
   color: #a6a6a6;
 }
 
+::-webkit-scrollbar {
+  width: 0.7rem;
+  border-radius: 0.5rem;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #a149fa;
+  border-radius: 0.5rem;
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: #7A0BC0;
+}
+
+/* RESPONSIVE DESIGN */
+@media screen and (min-width: 568px) {
+  .principal__search-bar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .principal__search-form {
+    width: 85%;
+  }
+  .principal__search-without_info, .principal__search-error_info {
+    margin-bottom: 0;
+  }
+  .principal__search-without_img, .principal__search-error_img {
+    width: 60%;
+  }
+  .principal__search-result_card {
+    display: flex;
+    justify-content: center;
+  }
+  .principal__search-result_card_container {
+    width: 80%;
+  }
+  .principal__search-forecast_card {
+    display: flex;
+    justify-content: center;
+  }
+  .principal__search-forecast_card_container {
+    width: 80%;
+  }
+}
+@media screen and (min-width: 768px) {
+  .principal__search-form {
+    width: 70%;
+  }
+  .principal__search-without_img, .principal__search-error_img {
+    width: 45%;
+  }
+  .principal__search-result_card_container {
+    width: 70%;
+  }
+  .principal__search-forecast_card_container {
+    width: 70%;
+  }
+}
+@media screen and (min-width: 1024px) {
+  .container {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .principal__search-results {
+    grid-template-columns: auto 50%;
+    column-gap: 2rem;
+  }
+  .principal__search-result_card_container {
+    width: 100%;
+  }
+  .principal__search-forecast_card_container {
+    width: 100%;
+  }
+}
+@media screen and (min-width: 1200px) {
+  .container {
+    max-width: 1180px;
+  }
+  .main {
+    height: 100vh;
+    margin-bottom: 0;
+  }
+  .main__container {
+    grid-template-columns: auto 25%;
+    column-gap: 3rem;
+  }
+  .principal__search-without, .principal__search-error {
+    position: relative;
+    left: 13rem;
+  }
+  .principal__search-without_img, .principal__search-error_img {
+    width: 67%;
+  }
+  .favorite {
+    position: fixed;
+    right: 2rem;
+    height: 540px;
+  }
+}
+
 /*# sourceMappingURL=style.css.map */

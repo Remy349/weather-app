@@ -114,7 +114,7 @@ const currentWeatherApiCall = async (cityNameValue) => {
 // Function to make the 5 days / 3 hours forecast data call
 const apiCallForecast = async (dataResults) => {
     try {
-        const urlForecast = `https://api.openweathermap.org/data/2.5/forecast?lat=${dataResults.coord.lat}&lon=${dataResults.coord.lon}&cnt=5&appid=${API_KEY}`
+        const urlForecast = `https://api.openweathermap.org/data/2.5/forecast?lat=${dataResults.coord.lat}&lon=${dataResults.coord.lon}&cnt=3&appid=${API_KEY}`
         // Make the request to the api
         const resForecast = await fetch(urlForecast, { method: "GET" })
 
