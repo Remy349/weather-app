@@ -1,6 +1,8 @@
 # Weather App
 A weather application developed with HTML, CSS/SASS and JavaScript, making use of ViteJS.
 
+View it here: https://remy349.github.io/weather-app/
+
 ## Project description
 Simple, do you want to know what the weather is like in your city or any other city?
 Just type the name of the city in the search bar and it will show you the weather data
