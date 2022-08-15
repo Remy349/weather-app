@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/weather-app/assets/favicon.17e50649.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- FLATICON -->
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css'>
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-solid-rounded/css/uicons-solid-rounded.css'>
+    <!-- TITLE -->
+    <title>WeatherApp</title>
+  <script type="module" crossorigin src="/weather-app/assets/index.0b58741f.js"></script>
+  <link rel="stylesheet" href="/weather-app/assets/index.5f96d48b.css">
+</head>
+<body>
+    <!-- HEADER -->
+    <header class="header">
+        <!-- NAV -->
+        <nav class="nav container">
+            <div class="nav__logo">WeatherApp</div>
+            <div class="nav__menu">
+                <ul class="nav__list">
+                    <li class="nav__item">
+                        <a class="nav__link nav__btn">
+                            <i class="fi fi-rr-moon nav__icon"></i>
+                            Dark Mode
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <!-- MAIN -->
+    <main class="main">
+        <div class="main__container container">
+            <!-- PRINCIPAL -->
+            <section class="principal">
+                <div class="principal__container">
+                    <!-- CONTENT -->
+                    <div class="principal__content" id="hideContent">
+                        <p class="principal__content-subtitle">
+                            Welcome to
+                        </p>
+                        <h1 class="principal__content-title">WeatherApp</h1>
+                        <p class="principal__content-text">
+                            Find out how good the weather
+                            <br>
+                            will be on your day!
+                        </p>
+                        <span class="principal__content-hide" id="hideContentBtn">
+                            Hide
+                        </span>
+                    </div>
+                    <!-- SEARCH -->
+                    <div class="principal__search">
+                        <!-- SEARCH FORM -->
+                        <div class="principal__search-bar">
+                            <form class="principal__search-form" id="searchForm">
+                                <input
+                                    type="text"
+                                    class="principal__search-form_input"
+                                    autocomplete="off"
+                                    id="cityName"
+                                    placeholder="City name"
+                                />
+                                <button type="submit" class="principal__search-form_btn">
+                                    <i class="fi fi-rr-search principal__search-form_icon"></i>
+                                </button>
+                            </form>
+                        </div>
+                        <!-- SEARCH RESULT -->
+                        <div class="principal__search-results" id="searchResults"></div>
+                    </div>
+                </div>
+            </section>
+            <!-- FAVORITE -->
+            <section class="favorite">
+                <div class="favorite__container">
+                    <div class="favorite__content">
+                        <div class="favorite__content-title">
+                            <h3>
+                                Weather in favorite <br> cities
+                            </h3>
+                        </div>
+                        <div class="favorite__content-data" id="favoriteWeather">
+                            <p class="favorite__content-data_text">
+                                No cities have been added yet!
+                            </p>
+                            <div class="favorite__content-data_star">
+                                <i class="fi fi-sr-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+    
+    <!-- SCRIPTS JS -->
+    
+</body>
+</html>
