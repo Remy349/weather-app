@@ -9,8 +9,5 @@
   },
   "devDependencies": {
     "vite": "^2.9.9"
-  },
-  "dependencies": {
-    "moment": "^2.29.4"
   }
 }
